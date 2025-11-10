@@ -1,0 +1,85 @@
+# Example: Easily readable format for plotting
+batch_results = {
+    256: [
+        {"latent_dim": 4000, "mse": 0.008097356, "accuracy": 0.425},
+        {"latent_dim": 4050, "mse": 0.0076945643, "accuracy": 0.44999999},
+        {"latent_dim": 4000, "mse": 0.007865134, "accuracy": 0.47499999},
+        {"latent_dim": 4050, "mse": 0.007899932, "accuracy": 0.4375},
+        {"latent_dim": 4000, "mse": 0.008024581, "accuracy": 0.46250001},
+        {"latent_dim": 4050, "mse": 0.008126714, "accuracy": 0.4375},
+    ],
+    128: [
+        {"latent_dim": 4000, "mse": 0.0063688178, "accuracy": 0.64999998},
+        {"latent_dim": 4050, "mse": 0.0064011957, "accuracy": 0.61250001},
+        {"latent_dim": 4000, "mse": 0.0062942244, "accuracy": 0.6875},
+        {"latent_dim": 4050, "mse": 0.0064308075, "accuracy": 0.71249998},
+        {"latent_dim": 4000, "mse": 0.0069216015, "accuracy": 0.63749999},
+        {"latent_dim": 4050, "mse": 0.0064066187, "accuracy": 0.625},
+    ],
+    64: [
+        {"latent_dim": 4000, "mse": 0.005426959, "accuracy": 0.72500002},
+        {"latent_dim": 4050, "mse": 0.0055397456, "accuracy": 0.73750001},
+        {"latent_dim": 4000, "mse": 0.0053725317, "accuracy": 0.76249999},
+        {"latent_dim": 4050, "mse": 0.005415745, "accuracy": 0.73750001},
+        {"latent_dim": 4000, "mse": 0.0054732915, "accuracy": 0.72500002},
+        {"latent_dim": 4050, "mse": 0.0056123016, "accuracy": 0.76249999},
+    ],
+    32: [
+        {"latent_dim": 4000, "mse": 0.0049899127, "accuracy": 0.72500002},
+        {"latent_dim": 4050, "mse": 0.005137178, "accuracy": 0.78750002},
+        {"latent_dim": 4000, "mse": 0.004893677, "accuracy": 0.78750002},
+        {"latent_dim": 4050, "mse": 0.005018778, "accuracy": 0.76249999},
+        {"latent_dim": 4000, "mse": 0.004987673, "accuracy": 0.78750002},
+        {"latent_dim": 4050, "mse": 0.0050121965, "accuracy": 0.75},
+    ],
+    0: [
+        {"latent_dim": 4000, "mse": 0.005028307, "accuracy": 0.75},
+        {"latent_dim": 4050, "mse": 0.005083115, "accuracy": 0.72500002},
+        {"latent_dim": 4000, "mse": 0.0048568747, "accuracy": 0.76249999},
+        {"latent_dim": 4050, "mse": 0.005245997, "accuracy": 0.76249999},
+        {"latent_dim": 4000, "mse": 0.0053687664, "accuracy": 0.69999999},
+        {"latent_dim": 4050, "mse": 0.004886812, "accuracy": 0.76249999},
+    ]
+}
+
+-------------------
+Selected Batch Size = 32
+-------------------
+
+###### Justification: #############
+Used 2 references
+The Effect of Batch Size on Autoencoder Reconstruction Accuracy
+Introduction
+Batch size is a critical hyperparameter in neural network training, influencing both the optimization dynamics and the generalization ability of the model. In the context of autoencoders, which are trained to reconstruct input data, batch size can significantly affect the quality of learned representations and, consequently, the downstream reconstruction accuracy as measured by a classifier.
+
+Observations
+From the experimental results provided, it is evident that reconstruction accuracy varies with batch size, even when the autoencoder architecture and latent dimension remain unchanged. Specifically, smaller batch sizes (e.g., 32 or 64) tend to yield higher reconstruction accuracy compared to larger batch sizes (e.g., 256), with the highest observed accuracy at batch size 32.
+
+Scientific Justification
+1. Gradient Estimation and Generalization
+
+Batch size determines how many samples are used to estimate the gradient during each optimization step. Smaller batch sizes introduce greater stochasticity into the gradient estimates, which can help the optimizer escape sharp minima and saddle points, potentially leading to better generalization (Keskar et al., 2017). In contrast, larger batch sizes provide more accurate but less noisy gradient estimates, which may cause the model to converge to sharp minima that do not generalize well.
+
+2. Regularization Effect
+
+The inherent noise in gradient estimates with small batch sizes acts as a form of implicit regularization (Smith & Le, 2018). This regularization can prevent overfitting to the training data and encourage the autoencoder to learn more robust features, which are beneficial for downstream tasks such as classification.
+
+3. Learning Dynamics
+
+Smaller batch sizes allow for more frequent updates to the model parameters, which can accelerate convergence and enable the model to explore a wider range of solutions. However, if the batch size is too small, the optimization process may become unstable, and the model may fail to converge.
+
+4. Computational Considerations
+
+While smaller batch sizes may improve generalization, they also increase training time due to less efficient use of hardware resources. Conversely, larger batch sizes are more computationally efficient but may compromise model performance.
+
+Appropriate Batch Size Selection
+Based on the empirical results and theoretical considerations, a batch size in the range of 32 to 64 appears optimal for your autoencoder on the Olivetti faces dataset. This range balances the benefits of stochastic gradient estimation and regularization with computational efficiency. Batch sizes larger than 128 consistently yield lower reconstruction accuracy, suggesting diminished generalization.
+
+Conclusion
+The choice of batch size should be guided by both empirical validation and theoretical understanding. For autoencoder-based reconstruction tasks, smaller batch sizes (32–64) are recommended to enhance generalization and reconstruction accuracy, as supported by both your results and the broader literature. It is advisable to perform a systematic grid search over batch sizes within this range to identify the optimal value for your specific dataset and model architecture.
+
+References
+Keskar, N. S., et al. (2017). "On Large-Batch Training for Deep Learning: Generalization Gap and Sharp Minima." ICLR 2017.
+Smith, S. L., & Le, Q. V. (2018). "A Bayesian Perspective on Generalization and Stochastic Gradient Descent." ICLR 2018.
+In summary:
+Smaller batch sizes improve reconstruction accuracy due to better generalization and implicit regularization. For your task, batch sizes of 32 or 64 are scientifically justified as optimal.

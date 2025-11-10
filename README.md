@@ -9,33 +9,34 @@ We evaluate our approach on benchmark datasets, including MNIST, CIFAR-10, and O
 </p>
 
 ## Implementation
+DimShield has been tested across four different adversarial attacks for three open source datasets. 
 
 ```bash
-├── BIM
+├── BIM                     # Adversarial Attak
     ├── CIFAR10
     ├── MNIST
     ├── OLIVETTI
-├── FGSM
+├── FGSM                    # Adversarial Attak
     ├── CIFAR10
     ├── MNIST
     ├── OLIVETTI
-├── JSMA
+├── JSMA                    # Adversarial Attak
     ├── CIFAR10
     ├── MNIST
     ├── OLIVETTI
-├── C&W
+├── C\&W                    # Adversarial Attak
     ├── CIFAR10
     ├── MNIST
     ├── OLIVETTI
-├── CNN
+├── CNN                     # Base Model 
     ├── CIFAR10
     ├── MNIST
     ├── OLIVETTI
-├── ID_Estimation
+├── ID_Estimation           # Estimating Intrinsic Dimension 
     ├── CIFAR10
     ├── MNIST
     ├── OLIVETTI
-├── DimShield
+├── DimShield               # DimShield Code to Mitigate Adversarial Attacks
     ├── CIFAR10
     ├── MNIST
     ├── OLIVETTI

@@ -5,5 +5,5 @@ We evaluate our approach on benchmark datasets, including MNIST, CIFAR-10, and O
 
 ## Threat Model
 <p align="center">
-  <img src="ThreatModel.pdf" width="500" title="DimShield: Threat Model">
+  <img src="ThreatModel.png" width="800" title="DimShield: Threat Model">
 </p>
